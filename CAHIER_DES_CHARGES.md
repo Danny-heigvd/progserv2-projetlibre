@@ -97,21 +97,25 @@ différents jeux de la franchise et de participer à des quiz sur leur contenu.
 
 ## Fonctionnalités optionnelles
 
-À réaliser si le temps le permet, par ordre de priorité :
+- Filtre supplémentaire dans l'encyclopédie : permettre de filtrer les jeux par
+  plateforme, année ou période.
 
-1. **Système de progression** : attribution d'XP aux utilisateurs en fonction de
-   leurs résultats et déblocage de niveaux.
-2. **Succès** : obtention de badges selon certaines performances (par exemple,
-   réussir 10 quiz ou obtenir un score parfait).
-3. **Quiz thématiques** : proposer des quiz consacrés à un jeu ou à une période
-   précise de la série.
-4. **Statistiques personnelles** : afficher le taux de réussite, le nombre de
-   bonnes réponses par niveau et les jeux sur lesquels l'utilisateur est le plus
-   performant.
-5. **Mode défi** : proposer un quiz avec un nombre limité de vies ou de
-   tentatives.
-6. **Commentaires sur les réponses** : afficher une courte explication après une
-   réponse afin d'apporter des informations supplémentaires sur le jeu concerné.
+- Recherche améliorée : permettre de rechercher un jeu directement depuis une
+  barre de recherche.
+
+- Quiz personnalisé : permettre à l'utilisateur de choisir le niveau de
+  difficulté avant de commencer un quiz.
+
+- Meilleur score personnel : afficher le meilleur score de l'utilisateur pour
+  chaque niveau de difficulté.
+
+- Réinitialisation du quiz : permettre de recommencer immédiatement un quiz
+  après avoir terminé une partie.
+
+- Informations supplémentaires : ajouter quelques informations simples aux
+  fiches des jeux, comme le développeur, l'éditeur ou le genre du jeu.
+
+- Image des jeux : ajouter une image ou une jaquette à la fiche de chaque jeu.
 
 ## Structure des données
 

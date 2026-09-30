@@ -51,7 +51,6 @@ différents jeux de la franchise et de participer à des quiz sur leur contenu.
     - brève présentation
     - informations générales sur le jeu
 
-  - Classement chronologique des jeux
   - Recherche d'un jeu par son titre
   - Filtrage des jeux selon différents critères, notamment leur période ou leur
     sous-série
@@ -127,7 +126,7 @@ Les principales données gérées par l'application seront notamment :
 - **Réponses** : réponses possibles associées aux questions
 - **Résultats** : scores obtenus par les utilisateurs lors des quiz
 
-Les données seront persistées dans une base de données afin de permettre leur
+Les données seront donc stocké dans une base de données afin de permettre leur
 consultation et leur modification entre différentes sessions.
 
 ## Bilan de fin de projet

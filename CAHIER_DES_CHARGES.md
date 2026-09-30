@@ -1,7 +1,7 @@
 # NFS Encyclopedia & Quiz
 
 > Projet réalisé dans le cadre du cours _Programmation serveur 2 (ProgServ2)_ à
-> la [HEIG-VD](https://heig-vd.ch), 2027.
+> la [HEIG-VD](https://heig-vd.ch), 2026.
 
 Application web dédiée à la série de jeux vidéo **Need for Speed**, combinant
 une encyclopédie des différents titres de la franchise et un système de quiz

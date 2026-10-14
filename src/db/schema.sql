@@ -53,7 +53,7 @@ CREATE TABLE utilisateur (
     mot_de_passe     VARCHAR(255) NOT NULL,
     est_actif        BOOLEAN   NOT NULL DEFAULT TRUE,
     date_inscription TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    points_totale    INTEGER   NOT NULL DEFAULT 0
+    points_total     INTEGER   NOT NULL DEFAULT 0
 );
 
 CREATE TABLE jeu (

@@ -50,7 +50,7 @@ CREATE TABLE utilisateur (
     id_utilisateur   SERIAL PRIMARY KEY,
     pseudo           VARCHAR(50)  NOT NULL UNIQUE,
     email            VARCHAR(255) NOT NULL UNIQUE,
-    mot_de_passe     VARCHAR(255) NOT NULL,          -- stocker un hash, jamais le mot de passe en clair
+    mot_de_passe     VARCHAR(255) NOT NULL,
     est_actif        BOOLEAN   NOT NULL DEFAULT TRUE,
     date_inscription TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -108,7 +108,7 @@ CREATE TABLE tentative (
     date_fin       TIMESTAMP,
     id_difficulte  INTEGER NOT NULL REFERENCES difficulte(id_difficulte),
     id_utilisateur INTEGER NOT NULL REFERENCES utilisateur(id_utilisateur),
-    CHECK (date_fin >= date_debut)    -- NULL accepté (tentative en cours)
+    CHECK (date_fin >= date_debut) 
 );
 
 CREATE TABLE reponse_donnee (

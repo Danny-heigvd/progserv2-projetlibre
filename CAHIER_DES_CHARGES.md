@@ -19,6 +19,10 @@ différents jeux de la franchise et de participer à des quiz sur leur contenu.
 - Danny Lopes
 - Rui Monnard
 
+## Maquette FIgma :
+
+- https://www.figma.com/design/iNqK5ImayJz9Qqs0ChkLRX/maquette-nfs?node-id=0-1&p=f&t=Bldifv111RJC6BTq-0
+
 ## Fonctionnalités principales
 
 - **Comptes et authentification**

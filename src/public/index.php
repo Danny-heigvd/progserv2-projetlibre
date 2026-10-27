@@ -21,13 +21,13 @@ $dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . $name . ";chars
 
 $pdo = new PDO($dsn, $user, $pass);
 
-$sql = "SELECT * FROM my_table";
+$sql = "SHOW TABLES";
 
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute();
 
-$results = $stmt->fetchAll();
+$results = $stmt->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
 <!DOCTYPE html>
@@ -48,12 +48,7 @@ $results = $stmt->fetchAll();
 
     <ul>
         <?php foreach ($results as $row) { ?>
-            <li>ID: <?= htmlspecialchars($row['id']) ?>
-                <ul>
-                    <li>Column1: <?= htmlspecialchars($row['column1']) ?></li>
-                    <li>Column2: <?= htmlspecialchars($row['column2']) ?></li>
-                </ul>
-            </li>
+            <li><?= htmlspecialchars($row) ?></li>
         <?php } ?>
     </ul>
 </body>

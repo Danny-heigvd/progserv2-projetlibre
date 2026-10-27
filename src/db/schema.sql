@@ -68,7 +68,7 @@ CREATE TABLE jeu (
     id_periode     INT NOT NULL,
     id_developpeur INT NOT NULL,
     FOREIGN KEY (id_periode) REFERENCES periode(id_periode),
-    FOREIGN KEY (id_developpeur) REFERENCES developpeur(id_developpeur
+    FOREIGN KEY (id_developpeur) REFERENCES developpeur(id_developpeur)
 );
 
 CREATE TABLE jeu_plateforme (
@@ -127,7 +127,7 @@ CREATE TABLE reponse_donnee (
     id_reponse_donnee INT AUTO_INCREMENT PRIMARY KEY,
     id_tentative      INT NOT NULL,
     id_option         INT NOT NULL,
-    UNIQUE (id_tentative, id_option)
+    UNIQUE (id_tentative, id_option),
     FOREIGN KEY (id_tentative) REFERENCES tentative(id_tentative),
     FOREIGN KEY (id_option) REFERENCES option_reponse(id_option)
 );

@@ -24,7 +24,12 @@ if (!$enLocal && file_exists($fichier)) {
 
 $dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . $name . ";charset=utf8mb4";
 
-$pdo = new PDO($dsn, $user, $pass);
+try {
+    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    exit($enLocal ? 'Erreur BDD : ' . htmlspecialchars($e->getMessage()) : 'Erreur BDD');
+}
 
 $sql = "SHOW TABLES";
 

@@ -17,9 +17,9 @@ if (!$enLocal && file_exists($fichier)) {
     $pass = $config['pass'];
 }
 
-$dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+$dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . $name . ";charset=utf8mb4";
 
-$pdo = new PDO($dsn, DB_USER, DB_PASSWORD);
+$pdo = new PDO($dsn, $user, $pass);
 
 $sql = "SELECT * FROM my_table";
 

@@ -5,6 +5,11 @@ const DB_NAME = 'my_database';
 const DB_USER = 'username';
 const DB_PASSWORD = 'password';
 
+$host = DB_HOST;
+$name = DB_NAME;
+$user = DB_USER;
+$pass = DB_PASSWORD;
+
 // En ligne (pas sur localhost) : on prend les identifiants d'Infomaniak
 $enLocal = in_array($_SERVER['SERVER_NAME'] ?? '', ['localhost', '127.0.0.1']);
 $fichier = __DIR__ . '/../config.local.php';

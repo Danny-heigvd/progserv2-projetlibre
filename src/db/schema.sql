@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS reponse_donnee;
 DROP TABLE IF EXISTS tentative;
-DROP TABLE IF EXISTS option;
+DROP TABLE IF EXISTS option_reponse;
 DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS element;
 DROP TABLE IF EXISTS jeu_plateforme;

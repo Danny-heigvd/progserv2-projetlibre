@@ -31,13 +31,7 @@ try {
     exit($enLocal ? 'Erreur BDD : ' . htmlspecialchars($e->getMessage()) : 'Erreur BDD');
 }
 
-$sql = "SHOW TABLES";
-
-$stmt = $pdo->prepare($sql);
-
-$stmt->execute();
-
-$results = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
 <!DOCTYPE html>
@@ -56,11 +50,32 @@ $results = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
     <h2>Résultats de la base de données :</h2>
 
-    <ul>
-        <?php foreach ($results as $row) { ?>
-            <li><?= htmlspecialchars($row) ?></li>
+    <?php foreach ($tables as $table) { ?>
+        <?php if ($table === 'utilisateur') continue; ?>
+
+        <h2><?= htmlspecialchars($table) ?></h2>
+
+        <?php $lignes = $pdo->query("SELECT * FROM `$table`")->fetchAll(PDO::FETCH_ASSOC); ?>
+
+        <?php if (empty($lignes)) { ?>
+            <p>Table vide</p>
+        <?php } else { ?>
+            <table border="1">
+                <tr>
+                    <?php foreach (array_keys($lignes[0]) as $colonne) { ?>
+                        <th><?= htmlspecialchars($colonne) ?></th>
+                    <?php } ?>
+                </tr>
+                <?php foreach ($lignes as $ligne) { ?>
+                    <tr>
+                        <?php foreach ($ligne as $valeur) { ?>
+                            <td><?= htmlspecialchars($valeur ?? '') ?></td>
+                        <?php } ?>
+                    </tr>
+                <?php } ?>
+            </table>
         <?php } ?>
-    </ul>
+    <?php } ?>
 </body>
 
 </html>

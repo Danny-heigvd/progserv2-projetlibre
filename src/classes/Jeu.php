@@ -30,6 +30,14 @@ class Jeu {
         return $this->resume;
     }
 
+    public function setResume(string $resume): void {
+        if (trim($resume) === '') {
+            throw new InvalidArgumentException('Le résumé ne peut pas être vide.');
+        }
+
+        $this->resume = trim($resume);
+    }
+
     public function getDateSortie(): ?string {
         return $this->dateSortie;
     }

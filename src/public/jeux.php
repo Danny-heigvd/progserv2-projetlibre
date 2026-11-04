@@ -47,7 +47,9 @@ try {
             <p>
                 <?= htmlspecialchars($jeu->getResume() ?? 'Aucun résumé', ENT_QUOTES, 'UTF-8') ?>
             </p>
-
+            <a href="jeu.php?id=<?= $jeu->getId() ?>">
+                Découvrir le jeu
+            </a>
         </article>
 
         <hr>

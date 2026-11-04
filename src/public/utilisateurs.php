@@ -7,12 +7,11 @@ $repository = new UtilisateurRepository(
 
 $message = '';
 
-// Vérifier si un formulaire a été envoyé
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Ajouter un utilisateur
+
         if ($_POST['action'] === 'ajouter') {
-            $user = new Utilisateur(
+            $user = new Utilisateurs(
                 null,
                 $_POST['pseudo'],
                 $_POST['email']
@@ -40,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Récupérer tous les utilisateurs
 $users = $repository->getUsers();
 ?>
 

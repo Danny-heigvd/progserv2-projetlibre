@@ -9,7 +9,7 @@ class UtilisateurRepository {
     }
 
     // Ajouter un utilisateur
-    public function addUser(Utilisateur $user, string $password): void {
+    public function addUser(Utilisateurs $user, string $password): void {
         if (strlen($password) < 12) {
             throw new InvalidArgumentException('Mot de passe trop court (12 caractères minimum).');
         }

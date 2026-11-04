@@ -62,7 +62,16 @@ class JeuRepository {
         return $this->creerJeu($ligne);
     }
 
-    // Transformer une ligne SQL en objet Jeu
+    public function updateResume(Jeu $jeu): void {
+        $sql = "UPDATE jeu SET resume = :resume WHERE id_jeu = :id";
+
+        $requete = $this->pdo->prepare($sql);
+
+        $requete->execute([
+            'resume' => $jeu->getResume(),
+            'id' => $jeu->getId()
+        ]);
+    }
     private function creerJeu(array $ligne): Jeu {
         return new Jeu(
             (int) $ligne['id_jeu'],

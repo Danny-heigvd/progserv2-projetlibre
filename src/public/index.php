@@ -1,37 +1,17 @@
 <?php
-const DB_HOST = 'mariadb';
-const DB_PORT = 3306;
-const DB_NAME = 'my_database';
-const DB_USER = 'username';
-const DB_PASSWORD = 'password';
-
-$host = DB_HOST;
-$name = DB_NAME;
-$user = DB_USER;
-$pass = DB_PASSWORD;
-
-// En ligne (pas sur localhost) : on prend les identifiants d'Infomaniak
-$enLocal = in_array($_SERVER['SERVER_NAME'] ?? '', ['localhost', '127.0.0.1']);
-$fichier = __DIR__ . '/../config.local.php';
-
-if (!$enLocal && file_exists($fichier)) {
-    $config = require $fichier;
-    $host = $config['host'];
-    $name = $config['name'];
-    $user = $config['user'];
-    $pass = $config['pass'];
-}
-
-$dsn = "mysql:host=" . $host . ";port=" . DB_PORT . ";dbname=" . $name . ";charset=utf8mb4";
+require_once __DIR__ . '/../utils/autoloader.php';
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    exit($enLocal ? 'Erreur BDD : ' . htmlspecialchars($e->getMessage()) : 'Erreur BDD');
-}
+    $database = new Database();
+    $pdo = $database->getConnection();
 
-$tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+    $tables = $pdo->query("SHOW TABLES")
+        ->fetchAll(PDO::FETCH_COLUMN);
+} catch (PDOException | RuntimeException $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    exit('Erreur BDD');
+}
 ?>
 
 <!DOCTYPE html>

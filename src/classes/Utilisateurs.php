@@ -4,11 +4,13 @@ class Utilisateurs {
     private ?int $id;
     private string $pseudo;
     private string $email;
+    private int $pointsTotal;
 
-    public function __construct(?int $id, string $pseudo, string $email) {
+    public function __construct(?int $id, string $pseudo, string $email, int $pointsTotal = 0) {
         $this->id = $id;
         $this->setPseudo($pseudo);
         $this->setEmail($email);
+        $this->pointsTotal = $pointsTotal;
     }
 
     public function getId(): ?int {
@@ -21,6 +23,10 @@ class Utilisateurs {
 
     public function getEmail(): string {
         return $this->email;
+    }
+
+    public function getPointsTotal(): int {
+        return $this->pointsTotal;
     }
 
     public function setPseudo(string $pseudo): void {

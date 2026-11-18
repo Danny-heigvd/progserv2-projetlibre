@@ -26,12 +26,23 @@ class UtilisateurRepository {
         ]);
     }
 
-    // Récupérer les utilisateurs
     public function getUsers(): array {
         $sql = "SELECT id_utilisateur, pseudo, email, points_total
-                FROM utilisateur ORDER BY id_utilisateur DESC";
+            FROM utilisateur ORDER BY id_utilisateur DESC";
 
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = $this->pdo->query($sql);
+        $utilisateurs = [];
+
+        while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
+            $utilisateurs[] = new Utilisateurs(
+                $ligne['id_utilisateur'],
+                $ligne['pseudo'],
+                $ligne['email'],
+                $ligne['points_total']
+            );
+        }
+
+        return $utilisateurs;
     }
 
     // Supprimer un utilisateur

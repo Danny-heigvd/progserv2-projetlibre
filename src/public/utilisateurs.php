@@ -81,14 +81,14 @@ $users = $repository->getUsers();
 
         <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $user['id_utilisateur'] ?></td>
-                <td><?= htmlspecialchars($user['pseudo']) ?></td>
-                <td><?= htmlspecialchars($user['email']) ?></td>
-                <td><?= $user['points_total'] ?></td>
+                <td><?= $user->getId() ?></td>
+                <td><?= htmlspecialchars($user->getPseudo()) ?></td>
+                <td><?= htmlspecialchars($user->getEmail()) ?></td>
+                <td><?= $user->getPointsTotal() ?></td>
                 <td>
                     <form method="POST">
                         <input type="hidden" name="action" value="supprimer">
-                        <input type="hidden" name="id" value="<?= $user['id_utilisateur'] ?>">
+                        <input type="hidden" name="id" value="<?= $user->getId() ?>">
 
                         <button type="submit">Supprimer</button>
                     </form>

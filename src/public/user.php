@@ -1,45 +1,47 @@
 <?php
+// Page « Créer un compte »
 require_once __DIR__ . '/../utils/autoloader.php';
 
-$repository = new UserRepository(
-    (new Database())->getConnection()
-);
-
 $message = '';
+$pseudo = '';
+$email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $pseudo = trim($_POST['pseudo'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmation = $_POST['confirmation'] ?? '';
+
     try {
-
-        if ($_POST['action'] === 'ajouter') {
-            $user = new User(
-                null,
-                $_POST['pseudo'],
-                $_POST['email']
-            );
-
-            $repository->addUser($user, $_POST['password']);
-            $message = 'Utilisateur ajouté !';
+        if ($password !== $confirmation) {
+            throw new InvalidArgumentException('Les deux mots de passe ne sont pas identiques.');
         }
 
-        // Supprimer un utilisateur
-        if ($_POST['action'] === 'supprimer') {
-            $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        // User vérifie le pseudo et l'e-mail
+        $user = new User(null, $pseudo, $email);
 
-            if (!$id) {
-                throw new InvalidArgumentException('ID invalide.');
-            }
+        $pdo = (new Database())->getConnection();
 
-            $repository->deleteUser($id);
-            $message = 'Utilisateur supprimé !';
+        // Vérifier si le pseudo ou l'e-mail existe déjà
+        $stmt = $pdo->prepare('SELECT id_utilisateur FROM utilisateur WHERE pseudo = ? OR email = ?');
+        $stmt->execute([$pseudo, $email]);
+
+        if ($stmt->fetch()) {
+            throw new InvalidArgumentException('Ce pseudo ou cet e-mail est déjà utilisé.');
         }
+
+        // addUser vérifie le mot de passe, puis enregistre
+        $repository = new UserRepository($pdo);
+        $repository->addUser($user, $password);
+
+        header('Location: connexion.php?inscription=ok');
+        exit;
     } catch (InvalidArgumentException $e) {
         $message = $e->getMessage();
     } catch (PDOException $e) {
-        $message = 'Erreur : pseudo ou email déjà utilisé, ou suppression impossible.';
+        $message = 'Une erreur est survenue, veuillez réessayer plus tard.';
     }
 }
-
-$users = $repository->getUsers();
 ?>
 
 <!DOCTYPE html>
@@ -47,56 +49,30 @@ $users = $repository->getUsers();
 
 <head>
     <meta charset="UTF-8">
-    <title>Utilisateurs</title>
+    <title>Créer un compte</title>
 </head>
 
 <body>
 
-    <h1>Gestion des utilisateurs</h1>
-
-    <h2>Ajouter un utilisateur</h2>
-
-    <form method="POST">
-        <input type="hidden" name="action" value="ajouter">
-
-        <input type="text" name="pseudo" placeholder="Pseudo" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Mot de passe" minlength="12" required>
-
-        <button type="submit">Ajouter</button>
-    </form>
+    <h1>Créer un compte</h1>
 
     <p><?= htmlspecialchars($message) ?></p>
 
-    <h2>Liste des utilisateurs</h2>
+    <form method="POST">
+        <input type="text" name="pseudo" placeholder="Pseudo"
+            value="<?= htmlspecialchars($pseudo) ?>" required>
 
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Pseudo</th>
-            <th>Email</th>
-            <th>Points</th>
-            <th>Action</th>
-        </tr>
+        <input type="email" name="email" placeholder="Email"
+            value="<?= htmlspecialchars($email) ?>" required>
 
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $user->getId() ?></td>
-                <td><?= htmlspecialchars($user->getPseudo()) ?></td>
-                <td><?= htmlspecialchars($user->getEmail()) ?></td>
-                <td><?= $user->getPointsTotal() ?></td>
-                <td>
-                    <form method="POST">
-                        <input type="hidden" name="action" value="supprimer">
-                        <input type="hidden" name="id" value="<?= $user->getId() ?>">
+        <input type="password" name="password" placeholder="Mot de passe" required>
 
-                        <button type="submit">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+        <input type="password" name="confirmation" placeholder="Confirmer le mot de passe" required>
 
-    </table>
+        <button type="submit">Créer mon compte</button>
+    </form>
+
+    <p>Déjà un compte ? <a href="connexion.php">Se connecter</a></p>
 
 </body>
 

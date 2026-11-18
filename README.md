@@ -221,16 +221,16 @@ Son utilisation a principalement concerné :
   d'apprentissage, et non comme un substitut à la compréhension du
   fonctionnement de l'application.
 
-Les propositions générées ont nécessité des adaptations, des corrections et des
-vérifications pour être compatibles avec notre code et les notions enseignées en
-cours. Certaines solutions initialement proposées ont notamment été revues ou
-supprimer afin de mieux respecter les principes de la programmation orientée
-objet.
+Les propositions générées ont nécessité beaucoup d'adaptations, des corrections
+et des vérifications pour être compatibles avec notre code et les notions
+enseignées en cours. Certaines solutions initialement proposées ont notamment
+été revues ou supprimer afin de mieux respecter les principes de la
+programmation orientée objet.
 
 Les décisions finales concernant les fonctionnalités, la structure du projet et
 l'intégration du code relèvent de notre responsabilité. Les fonctionnalités ont
 été testées dans leur environnement d'exécution avant d'être considérées comme
 opérationnelles.
 
-Cette démarche nous a permis de progresser dans la compréhension de PHP
-utilisées en gardant un regard critique sur les suggestions produites par l'IA.
+Cette démarche nous a permis de progresser dans la compréhension de PHP en
+gardant un regard critique sur les suggestions produites par l'IA.

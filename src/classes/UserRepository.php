@@ -1,4 +1,3 @@
-
 <?php
 
 class UserRepository {
@@ -24,6 +23,16 @@ class UserRepository {
             $user->getEmail(),
             password_hash($password, PASSWORD_DEFAULT)
         ]);
+    }
+
+    // Vérifier si un pseudo ou un e-mail est déjà utilisé
+    public function existe(string $pseudo, string $email): bool {
+        $sql = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = ? OR email = ?";
+
+        $requete = $this->pdo->prepare($sql);
+        $requete->execute([$pseudo, $email]);
+
+        return $requete->fetch() !== false;
     }
 
     public function getUsers(): array {

@@ -204,3 +204,33 @@ Lorsque vous fermez Visual Studio Code, les conteneurs Docker seront
 automatiquement arrêtés. Dès que vous rouvrez Visual Studio Code et que vous
 exécutez à nouveau la commande `docker compose up`, les services Docker seront
 redémarrés.
+
+## Utilisation de l'intelligence artificielle
+
+L'intelligence artificielle générative, a été utilisée comme outil
+d'accompagnement pendant le développement du projet.
+
+Son utilisation a principalement concerné :
+
+- La compréhension des concepts : explications complémentaires sur la POO, PDO,
+  les requêtes SQL, l'encapsulation et l'organisation du code.
+- Le débogage : aide à l'identification et à la compréhension d'erreurs
+  rencontrées.
+- La documentation : aide à la structuration et à la reformulation du README et
+  du cahier des charges. L'IA a été utilisée comme un support de réflexion et
+  d'apprentissage, et non comme un substitut à la compréhension du
+  fonctionnement de l'application.
+
+Les propositions générées ont nécessité beaucoup d'adaptations, des corrections
+et des vérifications pour être compatibles avec notre code et les notions
+enseignées en cours. Certaines solutions initialement proposées ont notamment
+été revues ou supprimer afin de mieux respecter les principes de la
+programmation orientée objet.
+
+Les décisions finales concernant les fonctionnalités, la structure du projet et
+l'intégration du code relèvent de notre responsabilité. Les fonctionnalités ont
+été testées dans leur environnement d'exécution avant d'être considérées comme
+opérationnelles.
+
+Cette démarche nous a permis de progresser dans la compréhension de PHP en
+gardant un regard critique sur les suggestions produites par l'IA.

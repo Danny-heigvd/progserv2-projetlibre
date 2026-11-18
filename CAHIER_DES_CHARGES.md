@@ -3,6 +3,11 @@
 > Projet réalisé dans le cadre du cours _Programmation serveur 2 (ProgServ2)_ à
 > la [HEIG-VD](https://heig-vd.ch), 2026.
 
+L'application web est disponible sur : https://nfs-archive.worldcup2014.ch/
+
+Lien vers la maquette Figma :
+https://www.figma.com/design/iNqK5ImayJz9Qqs0ChkLRX/maquette-nfs?node-id=0-1&p=f&t=Bldifv111RJC6BTq-0
+
 Application web dédiée à la série de jeux vidéo **Need for Speed**, combinant
 une encyclopédie des différents titres de la franchise et un système de quiz
 permettant de tester ses connaissances.

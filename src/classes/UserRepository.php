@@ -1,7 +1,7 @@
 
 <?php
 
-class UtilisateurRepository {
+class UserRepository {
     private PDO $pdo;
 
     public function __construct(PDO $pdo) {
@@ -9,7 +9,7 @@ class UtilisateurRepository {
     }
 
     // Ajouter un utilisateur
-    public function addUser(Utilisateurs $user, string $password): void {
+    public function addUser(User $user, string $password): void {
         if (strlen($password) < 12) {
             throw new InvalidArgumentException('Mot de passe trop court (12 caractères minimum).');
         }
@@ -31,10 +31,10 @@ class UtilisateurRepository {
             FROM utilisateur ORDER BY id_utilisateur DESC";
 
         $resultat = $this->pdo->query($sql);
-        $utilisateurs = [];
+        $users = [];
 
         while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
-            $utilisateurs[] = new Utilisateurs(
+            $users[] = new User(
                 $ligne['id_utilisateur'],
                 $ligne['pseudo'],
                 $ligne['email'],
@@ -42,7 +42,7 @@ class UtilisateurRepository {
             );
         }
 
-        return $utilisateurs;
+        return $users;
     }
 
     // Supprimer un utilisateur

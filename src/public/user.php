@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../utils/autoloader.php';
 
-$repository = new UtilisateurRepository(
+$repository = new UserRepository(
     (new Database())->getConnection()
 );
 
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
 
         if ($_POST['action'] === 'ajouter') {
-            $user = new Utilisateurs(
+            $user = new User(
                 null,
                 $_POST['pseudo'],
                 $_POST['email']

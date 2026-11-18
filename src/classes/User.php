@@ -1,6 +1,6 @@
 <?php
 
-class Utilisateurs {
+class User {
     private ?int $id;
     private string $pseudo;
     private string $email;

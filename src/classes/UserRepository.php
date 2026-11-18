@@ -35,6 +35,27 @@ class UserRepository {
         return $requete->fetch() !== false;
     }
 
+    public function authentifier(string $email, string $password): ?User {
+        $sql = "SELECT id_utilisateur, pseudo, email, mot_de_passe, points_total
+                FROM utilisateur
+                WHERE email = ? AND est_actif = 1";
+
+        $requete = $this->pdo->prepare($sql);
+        $requete->execute([$email]);
+        $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+
+        if ($ligne === false || !password_verify($password, $ligne['mot_de_passe'])) {
+            return null;
+        }
+
+        return new User(
+            $ligne['id_utilisateur'],
+            $ligne['pseudo'],
+            $ligne['email'],
+            $ligne['points_total']
+        );
+    }
+
     public function getUsers(): array {
         $sql = "SELECT id_utilisateur, pseudo, email, points_total
             FROM utilisateur ORDER BY id_utilisateur DESC";

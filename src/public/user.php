@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // addUser vérifie le mot de passe, puis enregistre l'utilisateur
         $repository->addUser($user, $password);
 
-        header('Location: connexion.php?inscription=ok');
+        header('Location: connection.php?inscription=ok');
         exit;
     } catch (InvalidArgumentException $e) {
         $message = $e->getMessage();
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Créer mon compte</button>
     </form>
 
-    <p>Déjà un compte ? <a href="connexion.php">Se connecter</a></p>
+    <p>Déjà un compte ? <a href="connection.php">Se connecter</a></p>
 
 </body>
 

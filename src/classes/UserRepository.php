@@ -14,35 +14,42 @@ class UserRepository {
         }
 
         $sql = "INSERT INTO utilisateur (pseudo, email, mot_de_passe)
-                VALUES (?, ?, ?)";
+                        VALUES (:pseudo, :email, :mot_de_passe)";
 
-        $requete = $this->pdo->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
 
-        $requete->execute([
-            $user->getPseudo(),
-            $user->getEmail(),
-            password_hash($password, PASSWORD_DEFAULT)
-        ]);
+        $stmt->bindValue(':pseudo', $user->getPseudo());
+        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':mot_de_passe', password_hash($password, PASSWORD_DEFAULT));
+
+        $stmt->execute();
     }
 
     // Vérifier si un pseudo ou un e-mail est déjà utilisé
     public function existe(string $pseudo, string $email): bool {
-        $sql = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = ? OR email = ?";
+        $sql = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = :pseudo OR email = :email";
 
-        $requete = $this->pdo->prepare($sql);
-        $requete->execute([$pseudo, $email]);
+        $stmt = $this->pdo->prepare($sql);
 
-        return $requete->fetch() !== false;
+        $stmt->bindValue(':pseudo', $pseudo);
+        $stmt->bindValue(':email', $email);
+
+        $stmt->execute();
+
+        return $stmt->fetch() !== false;
     }
 
     public function authentifier(string $email, string $password): ?User {
         $sql = "SELECT id_utilisateur, pseudo, email, mot_de_passe, points_total
-                FROM utilisateur
-                WHERE email = ? AND est_actif = 1";
+        FROM utilisateur
+        WHERE email = :email AND est_actif = 1";
 
-        $requete = $this->pdo->prepare($sql);
-        $requete->execute([$email]);
-        $ligne = $requete->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindValue(':email', $email);
+
+        $stmt->execute();
+        $ligne = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($ligne === false || !password_verify($password, $ligne['mot_de_passe'])) {
             return null;
@@ -61,6 +68,7 @@ class UserRepository {
             FROM utilisateur ORDER BY id_utilisateur DESC";
 
         $resultat = $this->pdo->query($sql);
+        $resultat->execute();
         $users = [];
 
         while ($ligne = $resultat->fetch(PDO::FETCH_ASSOC)) {
@@ -77,9 +85,10 @@ class UserRepository {
 
     // Supprimer un utilisateur
     public function deleteUser(int $id): void {
-        $sql = "DELETE FROM utilisateur WHERE id_utilisateur = ?";
+        $sql = "DELETE FROM utilisateur WHERE id_utilisateur = :id";
 
-        $requete = $this->pdo->prepare($sql);
-        $requete->execute([$id]);
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 }

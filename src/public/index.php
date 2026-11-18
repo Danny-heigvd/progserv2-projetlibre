@@ -19,6 +19,8 @@
     <h2>Quiz</h2>
     <p>Testez vos connaissances sur Need for Speed.</p>
     <a href="quiz.php">Lancer le quiz</a>
+
+    <p><a href="user.php">Gestion des utilisateurs</a></p>
 </body>
 
 </html>
